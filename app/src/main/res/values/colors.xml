@@ -13,4 +13,5 @@
     <color name="colorText">#101617</color>
     <color name="colorAccent">#C58BF2</color>
     <color name="colorGray">#7B6F72</color>
+    <color name="gainsboro">#DCDCDC</color>
 </resources>
