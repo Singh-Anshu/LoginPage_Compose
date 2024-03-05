@@ -19,16 +19,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.loginpagecompose.R
+import com.example.loginpagecompose.components.CheckBoxComponent
 import com.example.loginpagecompose.components.HeadingTextComponent
 import com.example.loginpagecompose.components.MyTextFeild
 import com.example.loginpagecompose.components.NormalTextComponent
-import com.example.loginpagecompose.components.PassWordTextFeild
+import com.example.loginpagecompose.components.PassWordTextField
 
 @Composable
 fun SignUpScreen() {
 
     Surface(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .background(Color.White)
             .padding(20.dp)
     ) {
@@ -47,7 +49,8 @@ fun SignUpScreen() {
             Spacer(Modifier.height(10.dp))
             MyTextFeild(stringResource(R.string.email), Icons.Default.Email)
             Spacer(Modifier.height(10.dp))
-            PassWordTextFeild(stringResource(R.string.password), Icons.Default.Lock)
+            PassWordTextField(stringResource(R.string.password), Icons.Default.Lock)
+            CheckBoxComponent(value = stringResource(R.string.terms_conditions))
         }
 
     }
