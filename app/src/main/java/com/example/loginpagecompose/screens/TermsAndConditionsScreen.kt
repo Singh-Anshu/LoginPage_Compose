@@ -10,7 +10,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.loginpagecompose.R
+import com.example.loginpagecompose.app.Screen
 import com.example.loginpagecompose.components.HeadingTextComponent
+import com.example.loginpagecompose.navigation.PostOfficeAppRouter
+import com.example.loginpagecompose.navigation.SystemBackButtonHandler
 
 @Composable
 fun TermsAndConditionsScreen() {
@@ -21,7 +24,11 @@ fun TermsAndConditionsScreen() {
             .padding(16.dp)
     ){
 
-        HeadingTextComponent(textName = stringResource(id = R.string.terms_conditions))
+        HeadingTextComponent(textName = stringResource(id = R.string.terms_conditions_label))
 
+    }
+
+    SystemBackButtonHandler {
+        PostOfficeAppRouter.navigateTo(Screen.SignUpScreen)
     }
 }

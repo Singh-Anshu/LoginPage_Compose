@@ -10,4 +10,8 @@
     <string name="show_password">Show Password</string>
     <string name="hide_password">hide Password</string>
     <string name="terms_conditions">By continuing you accept our Privacy Policy and Term of Use</string>
+    <string name="terms_conditions_label">Terms of Use</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="go_to_logn">Already have an account? Login</string>
 </resources>

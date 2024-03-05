@@ -6,6 +6,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.example.loginpagecompose.navigation.PostOfficeAppRouter
 import com.example.loginpagecompose.screens.SignUpScreen
 import com.example.loginpagecompose.screens.TermsAndConditionsScreen
 
@@ -16,7 +17,7 @@ fun PostOfficeApp(){
         modifier = Modifier.fillMaxSize(),
         color = Color.White
     ) {
-        Crossfade(targetState = PosOfficeAppRouter.currentState, label = "") { currentState ->
+        Crossfade(targetState = PostOfficeAppRouter.currentState, label = "") { currentState ->
             when(currentState.value){
 
                 is Screen.SignUpScreen -> {

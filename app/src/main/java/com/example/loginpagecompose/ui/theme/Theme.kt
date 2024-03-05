@@ -68,3 +68,4 @@ fun LoginPageComposeTheme(
         content = content
     )
 }
+
