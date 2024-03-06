@@ -1,8 +1,9 @@
 package com.example.loginpagecompose.components
 
-import android.content.res.Resources.Theme
 import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,13 +21,9 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material.ripple.LocalRippleTheme
-import androidx.compose.material.ripple.RippleAlpha
-import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.CheckboxColors
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -36,7 +33,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -46,6 +42,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -57,6 +54,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -72,7 +70,7 @@ fun NormalTextComponent(textName: String) {
             .heightIn(min = 40.dp),
         style = TextStyle(
             fontWeight = FontWeight.Normal,
-            fontSize = 24.sp,
+            fontSize = 20.sp,
             fontStyle = FontStyle.Normal
         ),
         color = colorResource(id = R.color.colorText),
@@ -100,7 +98,7 @@ fun HeadingTextComponent(textName: String) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyTextFeild(labelValue: String, imageVector: ImageVector) {
+fun MyTextField(labelValue: String, imageVector: ImageVector) {
 
     var textValue = rememberSaveable { mutableStateOf("") }
 
@@ -118,8 +116,11 @@ fun MyTextFeild(labelValue: String, imageVector: ImageVector) {
         // keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Done),
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Next,
-            keyboardType = KeyboardType.Text
+            keyboardType = KeyboardType.Text,
+
         ),
+        singleLine = true,
+        maxLines = 1,
         value = textValue.value,
         onValueChange = { it ->
             textValue.value = it
@@ -154,6 +155,8 @@ fun PassWordTextField(labelValue: String, imageVector: ImageVector) {
             keyboardType = KeyboardType.Password,
             imeAction = ImeAction.Done
         ),
+        singleLine = true,
+        maxLines = 1,
         value = password.value,
         onValueChange = {
             password.value = it
@@ -255,7 +258,7 @@ fun ClickableTextCompose(value: String, onTexSelected: (String) -> Unit) {
 }
 
 @Composable
-fun ButtonCoponent(value: String) {
+fun ButtonComponent(value: String) {
 
     Button(
         onClick = { /*TODO*/ },
@@ -267,7 +270,8 @@ fun ButtonCoponent(value: String) {
     ) {
 
         Box(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .heightIn(48.dp)
                 .background(
                     brush = Brush.horizontalGradient(
@@ -327,10 +331,63 @@ fun DividerComponent() {
 }
 
 @Composable
-fun ClickableLoginTextCompose(onTexSelected: (String) -> Unit) {
+fun LoginByGoogleAndFB() {
 
-    val initialText = "Already have an account? "
-    val loginText = " Login"
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+
+        Box(
+            modifier = Modifier
+                .size(50.dp)
+                .border(1.dp, color = Color.LightGray, shape = RoundedCornerShape(4.dp))
+                .background(
+                    color = Color.White,
+                ),
+
+            contentAlignment = Alignment.Center
+        ){
+            Image(
+                modifier = Modifier
+                    .width(24.dp)
+                    .height(24.dp),
+                painter = painterResource(id = R.drawable.google), contentDescription = "Google"
+            )
+        }
+
+        Spacer(modifier = Modifier.width(20.dp))
+
+        Box(
+            modifier = Modifier
+                .size(50.dp)
+                .border(1.dp, color = Color.LightGray, shape = RoundedCornerShape(4.dp))
+                .background(
+                    color = Color.White,
+                ),
+
+            contentAlignment = Alignment.Center
+        ){
+            Image(
+                modifier = Modifier
+                    .width(24.dp)
+                    .height(24.dp),
+                painter = painterResource(id = R.drawable.facebook),
+                contentDescription = "FaceBook"
+            )
+        }
+
+
+
+    }
+}
+
+@Composable
+fun ClickableLoginTextCompose(tryingToLogin: Boolean, onTexSelected: (String) -> Unit) {
+
+    val initialText = if(tryingToLogin)"Already have an account? " else "Don't have an account yet? "
+    val loginText =  if(tryingToLogin) " Login" else " Register"
 
     val annotatedString = buildAnnotatedString {
 
@@ -357,19 +414,33 @@ fun ClickableLoginTextCompose(onTexSelected: (String) -> Unit) {
                     Log.d("ClickableTextCompose", "${span}")
 
                     if (span.item == loginText) {
-
                         onTexSelected(span.item)
-
                     }
                 }
         })
 
 }
 
-private object NoRippleTheme : RippleTheme {
-    @Composable
-    override fun defaultColor() = Color.Unspecified
+@Composable
+fun UnderLinedTextComponent(textName: String) {
 
-    @Composable
-    override fun rippleAlpha(): RippleAlpha = RippleAlpha(0.0f, 0.0f, 0.0f, 0.0f)
+    Text(
+        text = textName,
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 40.dp),
+        style = TextStyle(
+            fontWeight = FontWeight.Normal,
+            fontSize = 16.sp,
+            fontStyle = FontStyle.Normal
+        ),
+        color = colorResource(id = R.color.colorText),
+        textAlign = TextAlign.Center,
+        textDecoration = TextDecoration.Underline
+    )
 }
+
+
+
+
+
