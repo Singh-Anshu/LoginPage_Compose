@@ -45,14 +45,14 @@ fun SignUpScreen() {
 
         val scrollSate  = rememberScrollState()
         Column(
-            modifier = Modifier.fillMaxSize().
-            verticalScroll(state = scrollSate),
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
 
         ) {
 
             Column(
-                modifier = Modifier.weight(1f), // This makes the column take up all available space
+                modifier = Modifier.weight(1f).
+                verticalScroll(state = scrollSate), // This makes the column take up all available space
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
