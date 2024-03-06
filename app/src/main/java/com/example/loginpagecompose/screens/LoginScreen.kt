@@ -56,21 +56,29 @@ fun LoginScreen() {
 
             ) {
 
-            NormalTextComponent(stringResource(R.string.hello))
-            HeadingTextComponent(stringResource(R.string.welcome_back))
-            Spacer(Modifier.height(20.dp))
-            MyTextField(stringResource(R.string.email), Icons.Default.Email)
-            Spacer(Modifier.height(10.dp))
-            PassWordTextField(stringResource(R.string.password), Icons.Default.Lock)
-            Spacer(Modifier.height(20.dp))
-            UnderLinedTextComponent(textName = stringResource(id = R.string.forgot_password))
-            Spacer(Modifier.height(80.dp))
-            ButtonComponent(value = stringResource(R.string.login))
-            Spacer(Modifier.height(20.dp))
-            DividerComponent()
-            Spacer(Modifier.height(10.dp))
-            LoginByGoogleAndFB()
-            Spacer(Modifier.height(100.dp))
+            Column(
+                modifier = Modifier.weight(1f), // This makes the column take up all available space
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                NormalTextComponent(stringResource(R.string.hello))
+                HeadingTextComponent(stringResource(R.string.welcome_back))
+                Spacer(Modifier.height(20.dp))
+                MyTextField(stringResource(R.string.email), Icons.Default.Email)
+                Spacer(Modifier.height(10.dp))
+                PassWordTextField(stringResource(R.string.password), Icons.Default.Lock)
+                Spacer(Modifier.height(20.dp))
+                UnderLinedTextComponent(textName = stringResource(id = R.string.forgot_password))
+                Spacer(Modifier.height(80.dp))
+                ButtonComponent(value = stringResource(R.string.login))
+                Spacer(Modifier.height(20.dp))
+                DividerComponent()
+                Spacer(Modifier.height(10.dp))
+                LoginByGoogleAndFB()
+                Spacer(Modifier.height(100.dp))
+            }
+
+            // This view set at the bottom
             ClickableLoginTextCompose(tryingToLogin = false, onTexSelected = {
                 PostOfficeAppRouter.navigateTo(Screen.SignUpScreen)
 

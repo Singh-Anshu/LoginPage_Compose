@@ -50,32 +50,41 @@ fun SignUpScreen() {
             horizontalAlignment = Alignment.CenterHorizontally,
 
         ) {
-            NormalTextComponent(stringResource(R.string.hello))
-           // Spacer(Modifier.height(20.dp))
-            HeadingTextComponent(stringResource(R.string.create_an_account))
-            Spacer(Modifier.height(20.dp))
-            MyTextField(stringResource(R.string.first_name), Icons.Default.Person)
-            Spacer(Modifier.height(10.dp))
-            MyTextField(stringResource(R.string.last_name), Icons.Default.Person)
-            Spacer(Modifier.height(10.dp))
-            MyTextField(stringResource(R.string.email), Icons.Default.Email)
-            Spacer(Modifier.height(10.dp))
-            PassWordTextField(stringResource(R.string.password), Icons.Default.Lock)
-            CheckBoxComponent(value = stringResource(R.string.terms_conditions),
-                onTexSelected = {
-                    PostOfficeAppRouter.navigateTo(Screen.TermsAndConditionsScreen)
-                })
-            Spacer(Modifier.height(80.dp))
-            ButtonComponent(value = stringResource(R.string.register))
-            Spacer(Modifier.height(20.dp))
-            DividerComponent()
-            Spacer(Modifier.height(10.dp))
-            LoginByGoogleAndFB()
-            Spacer(Modifier.height(100.dp))
+
+            Column(
+                modifier = Modifier.weight(1f), // This makes the column take up all available space
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                NormalTextComponent(stringResource(R.string.hello))
+                // Spacer(Modifier.height(20.dp))
+                HeadingTextComponent(stringResource(R.string.create_an_account))
+                Spacer(Modifier.height(20.dp))
+                MyTextField(stringResource(R.string.first_name), Icons.Default.Person)
+                Spacer(Modifier.height(10.dp))
+                MyTextField(stringResource(R.string.last_name), Icons.Default.Person)
+                Spacer(Modifier.height(10.dp))
+                MyTextField(stringResource(R.string.email), Icons.Default.Email)
+                Spacer(Modifier.height(10.dp))
+                PassWordTextField(stringResource(R.string.password), Icons.Default.Lock)
+                CheckBoxComponent(value = stringResource(R.string.terms_conditions),
+                    onTexSelected = {
+                        PostOfficeAppRouter.navigateTo(Screen.TermsAndConditionsScreen)
+                    })
+                Spacer(Modifier.height(80.dp))
+                ButtonComponent(value = stringResource(R.string.register))
+                Spacer(Modifier.height(20.dp))
+                DividerComponent()
+                Spacer(Modifier.height(10.dp))
+                LoginByGoogleAndFB()
+               // Spacer(Modifier.height(60.dp))
+
+            }
+
+            // This view set at the bottom
             ClickableLoginTextCompose(tryingToLogin = true, onTexSelected = {
                 PostOfficeAppRouter.navigateTo(Screen.LoginScreen)
             })
-
         }
 
     }
